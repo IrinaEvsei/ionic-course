@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let p of parray">
+      <ion-icon name="cafe" item-left></ion-icon>
+      <h1>{{p.name}}</h1>
+      <h3>{{p.description}}</h3>
+      <h3> rating: {{p.comment.rating}}</h3>
+      <h3> author: {{p.comment.author}}</h3>
+      <h3> comment: {{p.comment.text}}</h3>
+
+    </ion-item>
+
+
+
+  </ion-list>
+
+
+
+</ion-content>

@@ -1,0 +1,22 @@
+{
+  "persones": [
+    {
+      "id": 0,
+      "name": "Victor",
+      "job":"engineer",
+      "salary": 1000
+    },
+    {
+      "id": 1,
+      "name": "Masha",
+      "job":"administrator",
+      "salary": 200
+    }, 
+	{
+      "id": 3,
+      "name": "Olga",
+      "job":"tester",
+      "salary": 400
+    }
+  ]
+}
