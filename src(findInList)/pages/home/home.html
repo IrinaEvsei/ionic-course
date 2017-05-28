@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+   <ion-list>
+     <ion-list-header align="center"> My meal</ion-list-header>
+     <ion-item-sliding *ngFor="let item of items" #itm>
+         <ion-item>{{item}}</ion-item>
+         <ion-item-options side="right">
+             <button ion-button color="secondary" (click)="doAdd(itm)">
+                 <ion-icon name="add-circle"></ion-icon>
+                  Add
+             </button>
+             <button ion-button color="danger" (click)="doRemove(item,itm)">
+                 <ion-icon name="remove-circle"></ion-icon>
+                 Delete
+             </button>
+         </ion-item-options>
+
+         <ion-item-options side="left">
+             <button ion-button color="danger">
+                 <ion-icon name="rose"></ion-icon>
+                 For you
+             </button>
+         </ion-item-options>
+
+
+
+     </ion-item-sliding>
+
+
+   </ion-list>
+
+</ion-content>
