@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Your books</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="!auth.isAuthenticated()" class="login-title">
+    <h3>
+      Please, login first
+    </h3>
+    <button ion-button block color="primary" (click)="auth.login()">Login</button>
+  </div>
+
+  <ion-card *ngIf="auth.isAuthenticated()">
+    <ion-list no-lines>
+      <ion-item>
+        <ion-avatar item-left>
+          <img [src]="auth.user.picture"/>
+        </ion-avatar>
+        <h2>{{ auth.user.name }}</h2>
+        <button ion-button
+                (click)="auth.logout()"
+                clear
+                item-right
+                class="logout-btn">
+          Logout
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h3 *ngIf="auth.isAuthenticated()" class="list-title">Here are your favourite books:</h3>
+
+  <p *ngIf="auth.isAuthenticated()" class="refresh">Swipe for refresh</p>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+         pullingIcon="arrow-round-down"
+         pullingText="Pull to refresh"
+         refreshingSpinner="circles"
+         refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <p *ngIf="auth.isAuthenticated() && favouriteBooksList.length == 0" class="nothing-yet">Nothing yet</p>
+
+  <ion-list *ngIf="auth.isAuthenticated() && favouriteBooksList.length != 0">
+    <ion-item *ngFor="let book of favouriteBooksList; let i = index">
+      <ion-thumbnail item-left>
+        <img src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg">
+      </ion-thumbnail>
+      <h2>{{i + 1}}) {{book.title}}</h2>
+      <h3>{{book.author_name}}</h3>
+      <p>{{book.subtitle}}</p>
+      <p>First published at: {{book.first_publish_year}}</p>
+      <p>{{book.first_sentence}}</p>
+      <button ion-button
+              clear
+              item-right
+              large
+              (click)="onRemoveClick(i)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

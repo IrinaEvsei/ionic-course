@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Book searcher
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <h1 text-center>Search your favourite book!</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="text"
+                 placeholder="Enter the title"
+                 style="font-size: 16px;"
+                 #bookTitle>
+      </ion-input>
+      <button ion-button
+              block
+              (click)="onSearchClick(bookTitle.value)"
+              style="margin-top: 10px;">
+        Search
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-spinner *ngIf="!isDataReceived && canStartSpinner" name="crescent"></ion-spinner>
+
+  <ion-list *ngIf="isDataReceived">
+    <ion-item *ngFor="let book of booksList">
+      <ion-avatar item-left>
+        <img src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg">
+      </ion-avatar>
+      <h2>{{book.title_suggest}}</h2>
+      <h3>{{book.author_name}}</h3>
+      <p>{{book.subtitle}}</p>
+      <button ion-button
+              clear large
+              item-right
+              (click)="onBookLikeClick(book)">
+        <ion-icon name="heart" large></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <p class="nothing-found" *ngIf="!isFoundBooks">Oppps... Nothing found.</p>
+</ion-content>
